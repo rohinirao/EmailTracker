@@ -1,0 +1,65 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/download_hits":
+    get:
+      summary: Lists download hits with counts
+      tags:
+      - DownloadHits
+      responses:
+        '200':
+          description: list of download hits
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                    download_hits_count:
+                      type: integer
+                  required:
+                  - url
+                  - download_hits_count
+  "/api/v1/email_trackings/{email_tracking_uuid}/download_hits/track":
+    get:
+      summary: Tracks download hits and serves an image
+      tags:
+      - DownloadHits
+      parameters:
+      - name: email_tracking_uuid
+        in: path
+        description: Email tracking UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: image served and hit recorded
+  "/api/v1/email_trackings":
+    post:
+      summary: Create a new EmailTracking
+      tags:
+      - EmailTrackings
+      parameters: []
+      responses:
+        '200':
+          description: EmailTracking created
+        '422':
+          description: Invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message_id:
+                  type: string
+              required:
+              - message_id
+              - uuid
