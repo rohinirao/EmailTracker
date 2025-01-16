@@ -4,11 +4,27 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/download_hits":
+  "/api/v1/email_trackings/{email_tracking_uuid}/download_hits/track":
     get:
-      summary: Lists download hits with counts
+      summary: Tracks download hits and serves an image
       tags:
       - DownloadHits
+      parameters:
+      - name: email_tracking_uuid
+        in: path
+        description: Email tracking UUID
+        required: true
+        schema:
+          type: string
+      description: Returns a PNG image for tracking purposes
+      responses:
+        '200':
+          description: Image served and hit recorded
+  "/api/v1/email_trackings/stats":
+    get:
+      summary: Lists Tracking URL with download hits counts
+      tags:
+      - EmailTrackings Stats
       responses:
         '200':
           description: list of download hits
@@ -26,21 +42,6 @@ paths:
                   required:
                   - url
                   - download_hits_count
-  "/api/v1/email_trackings/{email_tracking_uuid}/download_hits/track":
-    get:
-      summary: Tracks download hits and serves an image
-      tags:
-      - DownloadHits
-      parameters:
-      - name: email_tracking_uuid
-        in: path
-        description: Email tracking UUID
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: image served and hit recorded
   "/api/v1/email_trackings":
     post:
       summary: Create a new EmailTracking
@@ -50,8 +51,32 @@ paths:
       responses:
         '200':
           description: EmailTracking created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    example: 123e4567-e89b-12d3-a456-426614174000
+                  url:
+                    type: string
+                    example: https://localhost:3000/email_trackings/123e4567-e89b-12d3-a456-426614174000/download_hits/track
+                required:
+                - uuid
+                - url
         '422':
           description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid message_id
+                required:
+                - error
       requestBody:
         content:
           application/json:
@@ -62,4 +87,3 @@ paths:
                   type: string
               required:
               - message_id
-              - uuid

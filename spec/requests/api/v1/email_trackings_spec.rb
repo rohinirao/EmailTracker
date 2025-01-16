@@ -1,6 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::EmailTrackingsController, type: :request do
+  describe 'GET #stats' do
+    before do
+      email_tracking1 = FactoryBot.create(:email_tracking, message_id: '<1234@example.com>', url: "http://localhost:3000/api/v1/email_trackings/uuid1/download_hits/track")
+      email_tracking2 = FactoryBot.create(:email_tracking, message_id: '<12345@example.com>', url: "http://localhost:3000/api/v1/email_trackings/uuid2/download_hits/track")
+
+      FactoryBot.create_list(:download_hit, 3, email_tracking: email_tracking1)
+      FactoryBot.create_list(:download_hit, 2, email_tracking: email_tracking2)
+    end
+
+    it 'returns a list of email trackings with download hits count' do
+      get stats_api_v1_email_trackings_path
+
+      expect(response).to have_http_status(:ok)
+
+      response_data = JSON.parse(response.body)
+      expect(response_data).to contain_exactly(
+        {
+          'url' => 'http://localhost:3000/api/v1/email_trackings/uuid1/download_hits/track',
+          'download_hits_count' => 3
+        },
+        {
+          'url' => 'http://localhost:3000/api/v1/email_trackings/uuid2/download_hits/track',
+          'download_hits_count' => 2
+        }
+      )
+    end
+  end
+
   describe 'POST #create' do
     context 'when the EmailTracking exists' do
       let!(:existing_email_tracking) { FactoryBot.create(:email_tracking, message_id: '<123@example.com>') }

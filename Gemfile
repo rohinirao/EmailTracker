@@ -16,9 +16,9 @@ gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
+# gem "solid_cache"
+# gem "solid_queue"
+# gem "solid_cable"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -29,8 +29,7 @@ gem "kamal", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
-gem "rswag-ui"     # Provides a user-friendly Swagger UI
-gem "rswag-api"    # Generates Swagger files for your API
+gem "active_model_serializers"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -42,9 +41,7 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'reek', require: false
-
-  gem 'rails_best_practices', require: false
+  gem "rails_best_practices", require: false
 
   gem "rspec-rails"
 
@@ -56,5 +53,8 @@ group :development, :test do
 
   gem "rswag-specs"
 
-  gem "byebug"
+  gem "rswag-ui"
+
+  gem "rswag-api"
+
 end
