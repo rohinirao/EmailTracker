@@ -50,7 +50,7 @@ Creates a tracking URL for a given email message ID.
 ```json
 {
   "uuid": "generated-uuid",
-  "tracking_url": "http://localhost:3000/api/v1/email_trackings/{uuid}/download_hits/track"
+  "url": "http://localhost:3000/api/v1/email_trackings/{uuid}/download_hits/track"
 }
 ```
 
@@ -72,8 +72,8 @@ Retrieves statistics for all tracking URLs.
   "tracking_stats": [
     {
       "message_id": "email-message-id",
-      "tracking_url": "tracking-url",
-      "hits_count": 5
+      "url": "tracking-url",
+      "download_hits_count": 5
     }
   ]
 }
