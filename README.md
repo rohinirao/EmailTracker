@@ -98,4 +98,4 @@ bundle exec rspec
 
 ## License
 
-[Include license information here]
+MIT License
