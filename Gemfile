@@ -56,5 +56,4 @@ group :development, :test do
   gem "rswag-ui"
 
   gem "rswag-api"
-
 end

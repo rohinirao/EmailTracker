@@ -41,7 +41,7 @@ Creates a tracking URL for a given email message ID.
 
 **Request Body:**
 ```json
-email_tracking: {
+"email_tracking": {
   "message_id": "unique-email-message-id"
 }
 ```
@@ -98,4 +98,4 @@ bundle exec rspec
 
 ## License
 
-[Include license information here]
+MIT License
