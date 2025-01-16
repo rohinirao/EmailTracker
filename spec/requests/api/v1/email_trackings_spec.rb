@@ -18,10 +18,12 @@ RSpec.describe Api::V1::EmailTrackingsController, type: :request do
       response_data = JSON.parse(response.body)
       expect(response_data).to contain_exactly(
         {
+          'message_id' => '<1234@example.com>',
           'url' => 'http://localhost:3000/api/v1/email_trackings/uuid1/download_hits/track',
           'download_hits_count' => 3
         },
         {
+          'message_id' => '<12345@example.com>',
           'url' => 'http://localhost:3000/api/v1/email_trackings/uuid2/download_hits/track',
           'download_hits_count' => 2
         }

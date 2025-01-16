@@ -10,10 +10,11 @@ RSpec.describe 'API::V1::EmailTrackings', type: :request do
         schema type: :array, items: {
           type: :object,
           properties: {
+            message_id: { type: :string },
             url: { type: :string },
             download_hits_count: { type: :integer }
           },
-          required: [ 'url', 'download_hits_count' ]
+          required: [ 'message_id', 'url', 'download_hits_count' ]
         }
 
         before do

@@ -11,7 +11,7 @@ class EmailTracking < ApplicationRecord
 
   scope :with_download_hits_count, lambda {
     left_joins(:download_hits)
-      .select("email_trackings.url, COUNT(download_hits.id) AS download_hits_count")
+      .select("email_trackings.message_id as message_id, email_trackings.url as url, COUNT(download_hits.id) AS download_hits_count")
       .group("email_trackings.id")
   }
 

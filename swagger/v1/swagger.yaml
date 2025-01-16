@@ -35,11 +35,14 @@ paths:
                 items:
                   type: object
                   properties:
+                    message_id:
+                      type: string
                     url:
                       type: string
                     download_hits_count:
                       type: integer
                   required:
+                  - message_id
                   - url
                   - download_hits_count
   "/api/v1/email_trackings":

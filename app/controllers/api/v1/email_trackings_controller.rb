@@ -1,7 +1,7 @@
 class Api::V1::EmailTrackingsController < ActionController::API
   def stats
     @email_trackings = EmailTracking.with_download_hits_count
-    render json: @email_trackings, each_serializer: Api::V1::EmailTrackingStatsSerializer
+    render json: @email_trackings, each_serializer: Api::V1::EmailTrackingStatsSerializer, status: :ok
   end
 
   def create
